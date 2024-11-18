@@ -51,24 +51,27 @@ function createRandomId (min, max) {
 }
 
 const generatePhotoId = createRandomId(1, POSTS_COUNT);
-const getRandomCommentId = createRandomId(1, 30 * POSTS_COUNT);
+const generateCommentId = createRandomId(1, 30 * POSTS_COUNT);
 
 const createComments = () => Array.from({length: getRandomInteger(0, 30)}, () => ({
-  id: getRandomCommentId(),
+  id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
   message: comments[getRandomInteger(0, comments.length - 1)],
   name: names[getRandomInteger(0, names.length - 1)]
 }));
+const createMockData = () => {
+  const data = Array.from({length: POSTS_COUNT}, () => {
+    const id = generatePhotoId();
+    return {
+      id: id,
+      url: `photos/${id}.jpg`,
+      description: descriptions[getRandomInteger(0, descriptions.length - 1)],
+      likes: getRandomInteger(15, 200),
+      comments: createComments(),
+    };
+  });
+  return data;
+};
+createMockData();
 
-const data = Array.from({length: POSTS_COUNT}, () => {
-  const id = generatePhotoId();
-  return {
-    id: id,
-    url: `photos/${id}.jpg`,
-    description: descriptions[getRandomInteger(0, descriptions.length - 1)],
-    likes: getRandomInteger(15, 200),
-    comments: createComments(),
-  };
-});
-console.log(data);
 
