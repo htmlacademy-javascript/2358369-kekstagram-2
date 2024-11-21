@@ -1,5 +1,5 @@
 const POSTS_COUNT = 25;
-const comments = [
+const COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -7,13 +7,13 @@ const comments = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
-const names = [
+const NAMES = [
   'Александр', 'Алексей', 'Андрей', 'Антон', 'Аркадий',
   'Борис', 'Вадим', 'Валентин', 'Валерий', 'Василий',
   'Виктор', 'Виталий', 'Владимир', 'Владислав', 'Геннадий',
   'Георгий', 'Григорий', 'Даниил',
 ];
-const descriptions = [
+const DESCRIPTIONS = [
   'Закат над спокойным морем.',
   'Горный пейзаж в облаках.',
   'Свет вечернего солнца в лесу.',
@@ -53,25 +53,31 @@ function createRandomId (min, max) {
 const generatePhotoId = createRandomId(1, POSTS_COUNT);
 const generateCommentId = createRandomId(1, 30 * POSTS_COUNT);
 
-const createComments = () => Array.from({length: getRandomInteger(0, 30)}, () => ({
+const createSingleComment = () => ({
   id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-  message: comments[getRandomInteger(0, comments.length - 1)],
-  name: names[getRandomInteger(0, names.length - 1)]
-}));
+  message: COMMENTS[getRandomInteger(0, COMMENTS.length - 1)],
+  name: NAMES[getRandomInteger(0, NAMES.length - 1)]
+});
+
+const createComments = () => Array.from({length: getRandomInteger(0, 30)}, createSingleComment);
+
+const createPhotoPost = () => {
+  const id = generatePhotoId();
+  return {
+    id: id,
+    url: `photos/${id}.jpg`,
+    description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
+    likes: getRandomInteger(15, 200),
+    comments: createComments(),
+  };
+};
+
 const createMockData = () => {
-  const data = Array.from({length: POSTS_COUNT}, () => {
-    const id = generatePhotoId();
-    return {
-      id: id,
-      url: `photos/${id}.jpg`,
-      description: descriptions[getRandomInteger(0, descriptions.length - 1)],
-      likes: getRandomInteger(15, 200),
-      comments: createComments(),
-    };
-  });
+  const data = Array.from({length: POSTS_COUNT}, createPhotoPost);
   return data;
 };
+
 createMockData();
 
 
