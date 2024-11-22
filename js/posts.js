@@ -1,7 +1,7 @@
 import { createRandomId, getRandomInteger } from './utils';
 import { POSTS_DATA } from './mock-data';
 
-const { POSTS_COUNT, NAMES, DESCRIPTIONS, COMMENTS} = POSTS_DATA;
+const { POSTS_COUNT, NAMES, DESCRIPTIONS, COMMENTS } = POSTS_DATA;
 
 const generatePhotoId = createRandomId(1, POSTS_COUNT);
 const generateCommentId = createRandomId(1, 30 * POSTS_COUNT);
