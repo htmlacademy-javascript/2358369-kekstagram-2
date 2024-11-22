@@ -31,4 +31,5 @@ const createMockPosts = () => {
   return data;
 };
 
+
 export {createMockPosts};
