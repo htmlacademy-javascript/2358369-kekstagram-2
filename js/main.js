@@ -1,2 +1,3 @@
-import './utils';
+import { createMockPosts } from './posts';
 
+createMockPosts();
