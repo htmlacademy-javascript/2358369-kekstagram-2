@@ -1,3 +1,3 @@
-import { createMockPosts } from './posts';
+import { createMockPosts } from './mock';
 
 createMockPosts();
