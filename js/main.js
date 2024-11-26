@@ -1,4 +1,4 @@
-import { createMockPosts } from './mock';
+import { createMockPosts } from './mock.js';
 
 createMockPosts();
 
