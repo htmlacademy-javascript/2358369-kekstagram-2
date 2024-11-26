@@ -1,5 +1,5 @@
 import { createRandomId, getRandomInteger } from './utils';
-import { printPosts } from './posts';
+import { printThumbnails } from './thumbnails';
 import { POSTS_DATA } from './data';
 
 const { POSTS_COUNT, NAMES, DESCRIPTIONS, COMMENTS } = POSTS_DATA;
@@ -30,7 +30,7 @@ const createPhotoPost = () => {
 const createMockPosts = () => {
   const data = Array.from({length: POSTS_COUNT}, createPhotoPost);
 
-  printPosts(data);
+  printThumbnails(data);
 };
 
 
