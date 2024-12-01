@@ -33,9 +33,11 @@ const insertPostComments = (commentsArr) => {
 };
 
 const openPostModal = (content) => {
+  console.log(content)
   document.body.classList.add('modal-open');
   postModal.querySelector('img').src = content.url;
   postModal.querySelector('.likes-count').textContent = content.likes;
+  postModal.querySelector('.social__caption').textContent = content.description;
   postModal.querySelector('.social__comment-total-count').textContent = content.comments.length;
   postModal.querySelector('.social__comment-count').classList.add('hidden');
   postModal.querySelector('.comments-loader').classList.add('hidden');
