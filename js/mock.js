@@ -1,7 +1,5 @@
-import { createRandomId, getRandomInteger } from './utils';
-import { printThumbnails } from './thumbnails';
-import { POSTS_DATA } from './data';
-
+import { createRandomId, getRandomInteger } from './utils.js';
+import { POSTS_DATA } from './data.js';
 const { POSTS_COUNT, NAMES, DESCRIPTIONS, COMMENTS } = POSTS_DATA;
 
 const generatePhotoId = createRandomId(1, POSTS_COUNT);
@@ -27,11 +25,7 @@ const createPhotoPost = () => {
   };
 };
 
-const createMockPosts = () => {
-  const data = Array.from({length: POSTS_COUNT}, createPhotoPost);
-
-  printThumbnails(data);
-};
-
+// const createMockPosts = () => Array.from({length: POSTS_COUNT}, createPhotoPost);
+const createMockPosts = () => Array.from({length: POSTS_COUNT}, createPhotoPost);
 
 export {createMockPosts};
