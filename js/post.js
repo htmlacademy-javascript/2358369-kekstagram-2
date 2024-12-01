@@ -33,7 +33,6 @@ const insertPostComments = (commentsArr) => {
 };
 
 const openPostModal = (content) => {
-  console.log(content)
   document.body.classList.add('modal-open');
   postModal.querySelector('img').src = content.url;
   postModal.querySelector('.likes-count').textContent = content.likes;
