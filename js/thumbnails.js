@@ -15,4 +15,4 @@ const printThumbnails = (data) => {
   picturesContainer.append(postsFragment);
 };
 
-export {printThumbnails};
+export {printThumbnails, picturesContainer};
