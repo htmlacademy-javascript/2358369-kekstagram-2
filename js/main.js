@@ -1,4 +1,3 @@
-import './post.js';
 import { createMockPosts } from './mock.js';
 import { printThumbnails } from './thumbnails.js';
 import { picturesContainer } from './thumbnails.js';

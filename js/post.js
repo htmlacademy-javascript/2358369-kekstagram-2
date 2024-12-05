@@ -1,3 +1,5 @@
+import { escKeypress } from './utils';
+
 const postModal = document.querySelector('.big-picture');
 const closeModalBtn = document.querySelector('.big-picture__cancel');
 const postComments = document.querySelector('.social__comments');
@@ -9,11 +11,6 @@ const closePostModal = () => {
   document.body.classList.remove('modal-open');
 };
 
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    closePostModal();
-  }
-});
 
 const insertPostComments = (commentsArr) => {
   const commentsFragment = document.createDocumentFragment();
@@ -33,6 +30,7 @@ const insertPostComments = (commentsArr) => {
 };
 
 const openPostModal = (content) => {
+  postModal.classList.remove('hidden');
   document.body.classList.add('modal-open');
   postModal.querySelector('img').src = content.url;
   postModal.querySelector('.likes-count').textContent = content.likes;
@@ -48,9 +46,12 @@ const openPostModal = (content) => {
 const findPostContent = (evt, data) => {
   const url = evt.target.closest('.picture').querySelector('img').src;
   const photoId = Number(url.split('/').pop().split('.')[0]);
-  const res = data.find((photo) => photo.id === photoId);
-  postModal.classList.remove('hidden');
-  openPostModal(res);
+  const postData = data.find((photo) => photo.id === photoId);
+  openPostModal(postData);
 };
+
+document.addEventListener('keydown', (evt) => {
+  escKeypress(evt, closePostModal);
+});
 
 export {findPostContent};

@@ -22,4 +22,10 @@ const createRandomId = (min, max) => {
   };
 };
 
-export {createRandomId, getRandomInteger};
+const escKeypress = (evt, fn) => {
+  if (evt.key === 'Escape') {
+    fn();
+  }
+};
+
+export {createRandomId, getRandomInteger, escKeypress};
