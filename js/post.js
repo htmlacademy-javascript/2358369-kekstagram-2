@@ -1,4 +1,4 @@
-import { escKeypress } from './utils';
+import { escKeypress } from './utils.js';
 
 const postModal = document.querySelector('.big-picture');
 const closeModalBtn = document.querySelector('.big-picture__cancel');
