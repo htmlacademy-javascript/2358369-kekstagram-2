@@ -5,7 +5,6 @@ const closeModalBtn = document.querySelector('.big-picture__cancel');
 const postComments = document.querySelector('.social__comments');
 const loadMore = document.querySelector('.social__comments-loader');
 const commentsCount = document.querySelector('.social__comment-shown-count');
-const commentsTotal = document.querySelector('.social__comment-total-count');
 
 const COUNT_STEP = 5;
 let currentCount = 0;
@@ -17,7 +16,7 @@ const closePostModal = () => {
   document.body.classList.remove('modal-open');
 };
 
-const clearComments = () => {
+const resetComments = () => {
   currentCount = 0;
   postComments.innerHTML = '';
   loadMore.classList.remove('hidden');
@@ -25,14 +24,14 @@ const clearComments = () => {
 
 const checkCommentsLength = () => {
   commentsCount.textContent = currentCount;
-  if (commentsCount.textContent === commentsTotal.textContent) {
+  if (currentCount === comments.length) {
     loadMore.classList.add('hidden');
   }
 };
 
-const insertMoreComments = (arr) => {
+const insertMoreComments = () => {
   const commentsFragment = document.createDocumentFragment();
-  const commentsToPrint = arr.slice(currentCount, currentCount + COUNT_STEP);
+  const commentsToPrint = comments.slice(currentCount, currentCount + COUNT_STEP);
   currentCount += commentsToPrint.length;
 
   commentsToPrint.forEach((comment) => {
@@ -54,8 +53,8 @@ const insertMoreComments = (arr) => {
 
 const insertPostComments = (newComments) => {
   comments = newComments;
-  clearComments();
-  insertMoreComments(comments);
+  resetComments();
+  insertMoreComments();
 };
 
 const openPostModal = (content) => {
@@ -65,7 +64,6 @@ const openPostModal = (content) => {
   postModal.querySelector('.likes-count').textContent = content.likes;
   postModal.querySelector('.social__caption').textContent = content.description;
   postModal.querySelector('.social__comment-total-count').textContent = content.comments.length;
-  clearComments();
   insertPostComments(content.comments);
   closeModalBtn.addEventListener('click', closePostModal);
 };
@@ -81,6 +79,6 @@ document.addEventListener('keydown', (evt) => {
   escKeypress(evt, closePostModal);
 });
 
-loadMore.addEventListener('click', () => insertMoreComments(comments));
+loadMore.addEventListener('click', () => insertMoreComments());
 
 export {findPostContent, postComments};
