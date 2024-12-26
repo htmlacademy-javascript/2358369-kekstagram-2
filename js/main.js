@@ -2,6 +2,8 @@ import { createMockPosts } from './mock.js';
 import { printThumbnails } from './thumbnails.js';
 import { picturesContainer } from './thumbnails.js';
 import { findPostContent } from './post.js';
+import './form.js';
+import './validation.js';
 
 const initApp = () => {
   const data = createMockPosts();
