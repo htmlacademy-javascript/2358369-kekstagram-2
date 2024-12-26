@@ -1,6 +1,5 @@
 import { escKeypress } from './utils.js';
-import { hashtagInput, resetUploadForm } from './validation.js';
-import { commentInput } from './validation.js';
+import { hashtagInput, resetUploadForm, commentInput } from './validation.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const editModal = document.querySelector('.img-upload__overlay');
