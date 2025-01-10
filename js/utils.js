@@ -28,4 +28,9 @@ const escKeypress = (evt, fn) => {
   }
 };
 
-export {createRandomId, getRandomInteger, escKeypress};
+const percentToInteger = (value) => Number(value.replace('%', ''));
+
+
+const integerToPercent = (value) => `${value}%`;
+
+export {createRandomId, getRandomInteger, escKeypress, percentToInteger, integerToPercent};

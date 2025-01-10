@@ -69,7 +69,11 @@ const openPostModal = (content) => {
 };
 
 const findPostContent = (evt, data) => {
-  const url = evt.target.closest('.picture').querySelector('img').src;
+  const postElement = evt.target.closest('.picture');
+  if (!postElement) {
+    return;
+  }
+  const url = postElement.querySelector('img').src;
   const photoId = Number(url.split('/').pop().split('.')[0]);
   const postData = data.find((photo) => photo.id === photoId);
   openPostModal(postData);
