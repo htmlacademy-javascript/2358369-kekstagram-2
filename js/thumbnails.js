@@ -8,6 +8,7 @@ const printThumbnails = (data) => {
     const singlePostImg = singlePost.querySelector('img');
     singlePostImg.src = post.url;
     singlePostImg.alt = post.description;
+    singlePost.dataset.id = post.id;
     singlePost.querySelector('.picture__likes').innerText = post.likes;
     singlePost.querySelector('.picture__comments').innerText = post.comments.length;
     postsFragment.append(singlePost);
@@ -15,4 +16,9 @@ const printThumbnails = (data) => {
   picturesContainer.append(postsFragment);
 };
 
-export {printThumbnails, picturesContainer};
+const removeThumbnails = () => {
+  const thumbnails = document.querySelectorAll('.picture');
+  thumbnails.forEach((thumbnail) => thumbnail.remove());
+};
+
+export {printThumbnails, picturesContainer, removeThumbnails};

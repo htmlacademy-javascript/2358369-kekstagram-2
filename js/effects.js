@@ -98,5 +98,11 @@ const toggleEffect = (evt) => {
   });
 };
 
+const setDefaultEffect = () => {
+  effectName = 'none';
+  sliderContainer.noUiSlider.reset();
+};
 
 effectsList.addEventListener('change', toggleEffect);
+
+export {setDefaultEffect};

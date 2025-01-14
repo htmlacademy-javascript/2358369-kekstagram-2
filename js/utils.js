@@ -30,7 +30,16 @@ const escKeypress = (evt, fn) => {
 
 const percentToInteger = (value) => Number(value.replace('%', ''));
 
-
 const integerToPercent = (value) => `${value}%`;
 
-export {createRandomId, getRandomInteger, escKeypress, percentToInteger, integerToPercent};
+const sortInDescending = (data) => {
+  const sortedData = data.sort((a, b) => b.comments.length - a.comments.length);
+  return sortedData;
+};
+
+const toggleBtnDisable = (btn) => {
+  btn.disabled = !btn.disabled;
+};
+
+
+export {createRandomId, getRandomInteger, escKeypress, percentToInteger, integerToPercent, sortInDescending, toggleBtnDisable};

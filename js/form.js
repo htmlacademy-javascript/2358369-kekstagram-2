@@ -1,5 +1,6 @@
 import { escKeypress, percentToInteger, integerToPercent } from './utils.js';
 import { hashtagInput, resetUploadForm, commentInput } from './validation.js';
+import { setDefaultEffect } from './effects.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const editModal = document.querySelector('.img-upload__overlay');
@@ -31,11 +32,18 @@ const zoomOut = () => {
   zoomValue.value = integerToPercent(valueNumber);
 };
 
+const setDefaultZoom = () => {
+  uploadImg.style.transform = 'scale(1)';
+  zoomValue.value = integerToPercent(MAX_ZOOM_VALUE);
+};
+
 const closeEditModal = () => {
   editModal.classList.add('hidden');
   document.body.classList.remove('modal-open');
   closeModalBtn.removeEventListener('click', closeEditModal);
   resetUploadForm();
+  setDefaultZoom();
+  setDefaultEffect();
 };
 
 const showEditModal = () => {
@@ -57,4 +65,4 @@ zoomOutBtn.addEventListener('click', zoomOut);
 uploadInput.addEventListener('change', showEditModal);
 
 
-export {uploadImg};
+export {uploadImg, closeEditModal};
