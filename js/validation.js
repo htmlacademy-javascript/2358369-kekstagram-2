@@ -1,6 +1,10 @@
+import { sendFormData } from './requests.js';
+import { toggleBtnDisable } from './utils.js';
+
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
+const formSubmitBtn = document.querySelector('.img-upload__submit');
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAG_COUNT = 5;
 const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -43,10 +47,20 @@ pristine.addValidator(hashtagInput, checkCount, 'Количество хэште
 pristine.addValidator(hashtagInput, checkValidity, 'Хэштег должен начинаться с #, может содержать только буквы и числа, а также не должен превышать 20 символов');
 pristine.addValidator(commentInput, checkCommentLength, 'Длина комментария не должна превышать 140 символов');
 
-uploadForm.addEventListener('submit', (evt) => {
+uploadForm.addEventListener('submit', async (evt) => {
+  evt.preventDefault();
+
   const isValid = pristine.validate();
-  if (!isValid) {
-    evt.preventDefault();
+  if (isValid) {
+    const formData = new FormData(uploadForm);
+
+    toggleBtnDisable(formSubmitBtn);
+
+    try {
+      await sendFormData(formData);
+    } finally {
+      toggleBtnDisable(formSubmitBtn);
+    }
   }
 });
 

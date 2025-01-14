@@ -1,4 +1,4 @@
-import { uploadImg } from './form';
+import { uploadImg } from './form.js';
 
 const effectsList = document.querySelector('.effects__list');
 const effectValue = document.querySelector('.effect-level__value');
@@ -98,5 +98,11 @@ const toggleEffect = (evt) => {
   });
 };
 
+const setDefaultEffect = () => {
+  effectName = 'none';
+  sliderContainer.noUiSlider.reset();
+};
 
 effectsList.addEventListener('change', toggleEffect);
+
+export {setDefaultEffect};

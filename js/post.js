@@ -73,9 +73,8 @@ const findPostContent = (evt, data) => {
   if (!postElement) {
     return;
   }
-  const url = postElement.querySelector('img').src;
-  const photoId = Number(url.split('/').pop().split('.')[0]);
-  const postData = data.find((photo) => photo.id === photoId);
+  const postId = postElement.dataset.id;
+  const postData = data.find((photo) => photo.id === Number(postId));
   openPostModal(postData);
 };
 
