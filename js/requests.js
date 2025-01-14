@@ -1,4 +1,4 @@
-import { showStatusMessage } from './notifications';
+import { showStatusMessage } from './notifications.js';
 import { closeEditModal } from './form';
 
 const getImageData = async () => {
