@@ -1,4 +1,4 @@
-import { uploadImg } from './form';
+import { uploadImg } from './form.js';
 
 const effectsList = document.querySelector('.effects__list');
 const effectValue = document.querySelector('.effect-level__value');

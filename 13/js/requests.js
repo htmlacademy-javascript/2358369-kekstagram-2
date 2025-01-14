@@ -1,5 +1,5 @@
-import { showStatusMessage } from './notifications';
-import { closeEditModal } from './form';
+import { showStatusMessage } from './notifications.js';
+import { closeEditModal } from './form.js';
 
 const getImageData = async () => {
   const response = await fetch('https://31.javascript.htmlacademy.pro/kekstagram/data');
