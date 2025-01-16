@@ -33,7 +33,7 @@ const percentToInteger = (value) => Number(value.replace('%', ''));
 const integerToPercent = (value) => `${value}%`;
 
 const sortInDescending = (data) => {
-  const sortedData = data.sort((a, b) => b.comments.length - a.comments.length);
+  const sortedData = [...data].sort((a, b) => b.comments.length - a.comments.length);
   return sortedData;
 };
 
@@ -41,5 +41,14 @@ const toggleBtnDisable = (btn) => {
   btn.disabled = !btn.disabled;
 };
 
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
 
-export {createRandomId, getRandomInteger, escKeypress, percentToInteger, integerToPercent, sortInDescending, toggleBtnDisable};
+  return function (...rest) {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {createRandomId, getRandomInteger, escKeypress, percentToInteger, integerToPercent, sortInDescending, toggleBtnDisable, debounce};
