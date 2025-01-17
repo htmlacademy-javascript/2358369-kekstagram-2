@@ -1,10 +1,8 @@
-import { sendFormData } from './requests.js';
-import { toggleBtnDisable } from './utils.js';
+import { sendImageForm } from './form.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
-const formSubmitBtn = document.querySelector('.img-upload__submit');
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAG_COUNT = 5;
 const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -53,15 +51,9 @@ uploadForm.addEventListener('submit', async (evt) => {
   const isValid = pristine.validate();
   if (isValid) {
     const formData = new FormData(uploadForm);
-
-    toggleBtnDisable(formSubmitBtn);
-
-    try {
-      await sendFormData(formData);
-    } finally {
-      toggleBtnDisable(formSubmitBtn);
-    }
+    await sendImageForm(formData);
   }
 });
+
 
 export {resetUploadForm, commentInput, hashtagInput};
