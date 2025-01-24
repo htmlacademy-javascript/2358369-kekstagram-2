@@ -2,7 +2,7 @@ import { escKeypress, percentToInteger, integerToPercent, toggleBtnDisable } fro
 import { sendFormData } from './requests.js';
 import { showStatusMessage } from './notifications.js';
 import { hashtagInput, resetUploadForm, commentInput } from './validation.js';
-import { setDefaultEffect } from './effects.js';
+import { resetSlider } from './effects.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const editModal = document.querySelector('.img-upload__overlay');
@@ -12,6 +12,11 @@ const zoomOutBtn = document.querySelector('.scale__control--smaller');
 const zoomValue = document.querySelector('.scale__control--value');
 const uploadImg = document.querySelector('.img-upload__preview img');
 const formSubmitBtn = document.querySelector('.img-upload__submit');
+const fileChooser = document.querySelector('#upload-file');
+const preview = document.querySelector('.img-upload__preview img');
+const effectPreviews = document.querySelectorAll('.effects__preview');
+
+const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
 const MIN_ZOOM_VALUE = 25;
 const MAX_ZOOM_VALUE = 100;
 const ZOOM_STEP = 25;
@@ -46,13 +51,26 @@ const closeEditModal = () => {
   closeModalBtn.removeEventListener('click', closeEditModal);
   resetUploadForm();
   setDefaultZoom();
-  setDefaultEffect();
+  resetSlider();
 };
 
 const showEditModal = () => {
   editModal.classList.remove('hidden');
   document.body.classList.add('modal-open');
   closeModalBtn.addEventListener('click', closeEditModal);
+};
+
+const imageUpload = () => {
+  const file = fileChooser.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    preview.src = URL.createObjectURL(file);
+    effectPreviews.forEach((element) => {
+      element.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    });
+  }
 };
 
 const sendImageForm = async (formData) => {
@@ -85,7 +103,10 @@ document.addEventListener('keydown', (evt) => {
 zoomInBtn.addEventListener('click', zoomIn);
 zoomOutBtn.addEventListener('click', zoomOut);
 
-uploadInput.addEventListener('change', showEditModal);
+uploadInput.addEventListener('change', () => {
+  showEditModal();
+  imageUpload();
+});
 
 
 export {uploadImg, closeEditModal, sendImageForm};

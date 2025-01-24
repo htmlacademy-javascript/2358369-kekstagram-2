@@ -1,5 +1,4 @@
 import { printThumbnails } from './thumbnails';
-import { data } from './main';
 import { createRandomId, sortInDescending, debounce } from './utils';
 
 const RANDOM_POSTS_COUNT = 10;
@@ -10,7 +9,7 @@ const showFilters = () => {
   filters.classList.remove('img-filters--inactive');
 };
 
-const getRandomPosts = () => {
+const getRandomPosts = (data) => {
   const randomData = [];
   const generateRandomPosts = createRandomId(0, data.length - 1);
   for (let i = 0; i < RANDOM_POSTS_COUNT; i++) {
@@ -22,7 +21,7 @@ const getRandomPosts = () => {
   return randomData;
 };
 
-const applyFilter = (filter) => {
+const applyFilter = (filter, data) => {
   const initialData = data;
 
   const debouncePrint = debounce(printThumbnails);
@@ -32,7 +31,7 @@ const applyFilter = (filter) => {
       break;
     }
     case 'filter-random': {
-      const randomPosts = getRandomPosts();
+      const randomPosts = getRandomPosts(data);
       debouncePrint(randomPosts);
       break;
     }
@@ -43,7 +42,7 @@ const applyFilter = (filter) => {
   }
 };
 
-const toggleFilters = (evt) => {
+const toggleFilters = (evt, data) => {
   const filterBtn = evt.target.closest('.img-filters__button');
   if (!filterBtn) {
     return;
@@ -55,10 +54,8 @@ const toggleFilters = (evt) => {
   activeFilterBtn.classList.remove(`${ACTIVE_FILTER}`);
   filterBtn.classList.add(ACTIVE_FILTER);
 
-  applyFilter(filterName);
+  applyFilter(filterName, data);
 };
 
 
-filters.addEventListener('click', toggleFilters);
-
-export {showFilters};
+export {showFilters, filters, toggleFilters};
