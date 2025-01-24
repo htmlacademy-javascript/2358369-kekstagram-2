@@ -6,7 +6,7 @@ import { picturesContainer } from './thumbnails.js';
 import { findPostContent } from './post.js';
 import { getImageData } from './requests.js';
 import { showDataError } from './notifications.js';
-import { showFilters } from './filters.js';
+import { showFilters, toggleFilters, filters } from './filters.js';
 
 let data;
 
@@ -18,6 +18,9 @@ const initApp = async () => {
     showFilters();
     printThumbnails(data);
 
+    filters.addEventListener('click', (evt) => {
+      toggleFilters(evt, data);
+    });
     picturesContainer.addEventListener('click', (evt) => {
       findPostContent(evt, data);
     });
@@ -28,5 +31,3 @@ const initApp = async () => {
 };
 
 document.addEventListener('DOMContentLoaded', initApp);
-
-export {data};
