@@ -13,8 +13,8 @@ const getRandomPosts = (data) => {
   const randomData = [];
   const generateRandomPosts = createRandomId(0, data.length - 1);
   for (let i = 0; i < RANDOM_POSTS_COUNT; i++) {
-    const id = generateRandomPosts();
-    const post = data[id];
+    const randomIndex = generateRandomPosts();
+    const post = data[randomIndex];
     randomData.push(post);
 
   }

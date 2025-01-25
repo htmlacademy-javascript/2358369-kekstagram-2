@@ -4,6 +4,11 @@ import { showStatusMessage } from './notifications.js';
 import { hashtagInput, resetUploadForm, commentInput } from './validation.js';
 import { resetSlider } from './effects.js';
 
+const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
+const MIN_ZOOM_VALUE = 25;
+const MAX_ZOOM_VALUE = 100;
+const ZOOM_STEP = 25;
+
 const uploadInput = document.querySelector('#upload-file');
 const editModal = document.querySelector('.img-upload__overlay');
 const closeModalBtn = document.querySelector('.img-upload__cancel');
@@ -15,11 +20,6 @@ const formSubmitBtn = document.querySelector('.img-upload__submit');
 const fileChooser = document.querySelector('#upload-file');
 const preview = document.querySelector('.img-upload__preview img');
 const effectPreviews = document.querySelectorAll('.effects__preview');
-
-const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
-const MIN_ZOOM_VALUE = 25;
-const MAX_ZOOM_VALUE = 100;
-const ZOOM_STEP = 25;
 
 
 const zoomIn = () => {

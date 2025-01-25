@@ -1,11 +1,12 @@
 import { sendImageForm } from './form.js';
 
-const uploadForm = document.querySelector('.img-upload__form');
-const hashtagInput = document.querySelector('.text__hashtags');
-const commentInput = document.querySelector('.text__description');
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAG_COUNT = 5;
 const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
+
+const uploadForm = document.querySelector('.img-upload__form');
+const hashtagInput = document.querySelector('.text__hashtags');
+const commentInput = document.querySelector('.text__description');
 
 
 const pristine = new Pristine(uploadForm, {

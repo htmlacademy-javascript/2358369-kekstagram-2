@@ -1,12 +1,5 @@
 import { uploadImg } from './form.js';
 
-const effectsList = document.querySelector('.effects__list');
-const effectValue = document.querySelector('.effect-level__value');
-const sliderContainer = document.querySelector('.effect-level__slider');
-const slider = document.querySelector('.img-upload__effect-level');
-
-let currentEffect = 'none';
-
 const EFFECTS_DATA = {
   none: { min: 0, max: 0, step: 0, unit: '', filter: 'none' },
   chrome: { min: 0, max: 1, step: 0.1, unit: '', filter: 'grayscale' },
@@ -16,6 +9,14 @@ const EFFECTS_DATA = {
   heat: { min: 1, max: 3, step: 0.1, unit: '', filter: 'brightness' },
 };
 
+const effectsList = document.querySelector('.effects__list');
+const effectValue = document.querySelector('.effect-level__value');
+const sliderContainer = document.querySelector('.effect-level__slider');
+const slider = document.querySelector('.img-upload__effect-level');
+
+let currentEffect = 'none';
+
+
 noUiSlider.create(sliderContainer, {
   start: EFFECTS_DATA.none.min,
   step: EFFECTS_DATA.none.step,
@@ -24,6 +25,14 @@ noUiSlider.create(sliderContainer, {
     max: EFFECTS_DATA.none.max,
   },
   connect: 'lower',
+  format: {
+    to: function (value) {
+      return value;
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
 });
 
 slider.classList.add('hidden');
