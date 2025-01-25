@@ -1,12 +1,13 @@
 import { escKeypress } from './utils.js';
 
+const COUNT_STEP = 5;
+
 const postModal = document.querySelector('.big-picture');
 const closeModalBtn = document.querySelector('.big-picture__cancel');
 const postComments = document.querySelector('.social__comments');
 const loadMore = document.querySelector('.social__comments-loader');
 const commentsCount = document.querySelector('.social__comment-shown-count');
 
-const COUNT_STEP = 5;
 let currentCount = 0;
 let comments = [];
 
