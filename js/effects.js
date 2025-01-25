@@ -1,4 +1,4 @@
-import { uploadImg } from './form.js';
+import { imgPreview } from './form.js';
 
 const EFFECTS_DATA = {
   none: { min: 0, max: 0, step: 0, unit: '', filter: 'none' },
@@ -47,7 +47,7 @@ const toggleSliderVisibility = () => {
 
 const applyFilter = (value) => {
   const { filter, unit } = EFFECTS_DATA[currentEffect];
-  uploadImg.style.filter = filter === 'none' ? 'none' : `${filter}(${value}${unit})`;
+  imgPreview.style.filter = filter === 'none' ? 'none' : `${filter}(${value}${unit})`;
 };
 
 const updateSliderOptions = () => {

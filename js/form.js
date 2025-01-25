@@ -15,10 +15,9 @@ const closeModalBtn = document.querySelector('.img-upload__cancel');
 const zoomInBtn = document.querySelector('.scale__control--bigger');
 const zoomOutBtn = document.querySelector('.scale__control--smaller');
 const zoomValue = document.querySelector('.scale__control--value');
-const uploadImg = document.querySelector('.img-upload__preview img');
+const imgPreview = document.querySelector('.img-upload__preview img');
 const formSubmitBtn = document.querySelector('.img-upload__submit');
 const fileChooser = document.querySelector('#upload-file');
-const preview = document.querySelector('.img-upload__preview img');
 const effectPreviews = document.querySelectorAll('.effects__preview');
 
 
@@ -26,7 +25,7 @@ const zoomIn = () => {
   let valueNumber = percentToInteger(zoomValue.value);
   if (valueNumber + ZOOM_STEP <= MAX_ZOOM_VALUE) {
     valueNumber += 25;
-    uploadImg.style.transform = `scale(${valueNumber / 100})`;
+    imgPreview.style.transform = `scale(${valueNumber / 100})`;
   }
   zoomValue.value = integerToPercent(valueNumber);
 };
@@ -35,13 +34,13 @@ const zoomOut = () => {
   let valueNumber = percentToInteger(zoomValue.value);
   if (valueNumber - ZOOM_STEP >= MIN_ZOOM_VALUE) {
     valueNumber -= 25;
-    uploadImg.style.transform = `scale(${valueNumber / 100})`;
+    imgPreview.style.transform = `scale(${valueNumber / 100})`;
   }
   zoomValue.value = integerToPercent(valueNumber);
 };
 
 const setDefaultZoom = () => {
-  uploadImg.style.transform = 'scale(1)';
+  imgPreview.style.transform = 'scale(1)';
   zoomValue.value = integerToPercent(MAX_ZOOM_VALUE);
 };
 
@@ -66,7 +65,7 @@ const imageUpload = () => {
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {
-    preview.src = URL.createObjectURL(file);
+    imgPreview.src = URL.createObjectURL(file);
     effectPreviews.forEach((element) => {
       element.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
     });
@@ -109,4 +108,4 @@ uploadInput.addEventListener('change', () => {
 });
 
 
-export {uploadImg, closeEditModal, sendImageForm};
+export {imgPreview, closeEditModal, sendImageForm};
