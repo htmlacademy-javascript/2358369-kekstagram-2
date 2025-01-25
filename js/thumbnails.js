@@ -16,8 +16,8 @@ const printThumbnails = (data) => {
     singlePostImg.src = post.url;
     singlePostImg.alt = post.description;
     singlePost.dataset.id = post.id;
-    singlePost.querySelector('.picture__likes').innerText = post.likes;
-    singlePost.querySelector('.picture__comments').innerText = post.comments.length;
+    singlePost.querySelector('.picture__likes').textContent = post.likes;
+    singlePost.querySelector('.picture__comments').textContent = post.comments.length;
     postsFragment.append(singlePost);
   });
   picturesContainer.append(postsFragment);
