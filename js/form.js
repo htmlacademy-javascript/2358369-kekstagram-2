@@ -17,14 +17,13 @@ const zoomOutBtn = document.querySelector('.scale__control--smaller');
 const zoomValue = document.querySelector('.scale__control--value');
 const imgPreview = document.querySelector('.img-upload__preview img');
 const formSubmitBtn = document.querySelector('.img-upload__submit');
-const fileChooser = document.querySelector('#upload-file');
 const effectPreviews = document.querySelectorAll('.effects__preview');
 
 
 const zoomIn = () => {
   let valueNumber = percentToInteger(zoomValue.value);
   if (valueNumber + ZOOM_STEP <= MAX_ZOOM_VALUE) {
-    valueNumber += 25;
+    valueNumber += ZOOM_STEP;
     imgPreview.style.transform = `scale(${valueNumber / 100})`;
   }
   zoomValue.value = integerToPercent(valueNumber);
@@ -33,7 +32,7 @@ const zoomIn = () => {
 const zoomOut = () => {
   let valueNumber = percentToInteger(zoomValue.value);
   if (valueNumber - ZOOM_STEP >= MIN_ZOOM_VALUE) {
-    valueNumber -= 25;
+    valueNumber -= ZOOM_STEP;
     imgPreview.style.transform = `scale(${valueNumber / 100})`;
   }
   zoomValue.value = integerToPercent(valueNumber);
@@ -60,7 +59,7 @@ const showEditModal = () => {
 };
 
 const imageUpload = () => {
-  const file = fileChooser.files[0];
+  const file = uploadInput.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
