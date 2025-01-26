@@ -8,9 +8,9 @@ import { getImageData } from './requests.js';
 import { showDataError } from './notifications.js';
 import { showFilters, toggleFilters, filters } from './filters.js';
 
-let data;
 
 const initApp = async () => {
+  let data;
 
   try {
     data = await getImageData();

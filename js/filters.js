@@ -2,6 +2,7 @@ import { printThumbnails } from './thumbnails';
 import { createRandomId, sortInDescending, debounce } from './utils';
 
 const RANDOM_POSTS_COUNT = 10;
+const ACTIVE_FILTER = 'img-filters__button--active';
 
 const filters = document.querySelector('.img-filters');
 
@@ -11,36 +12,35 @@ const showFilters = () => {
 
 const getRandomPosts = (data) => {
   const randomData = [];
-  const generateRandomPosts = createRandomId(0, data.length - 1);
+  const generateRandomIndex = createRandomId(0, data.length - 1);
   for (let i = 0; i < RANDOM_POSTS_COUNT; i++) {
-    const randomIndex = generateRandomPosts();
+    const randomIndex = generateRandomIndex();
     const post = data[randomIndex];
     randomData.push(post);
-
   }
   return randomData;
 };
 
-const applyFilter = (filter, data) => {
+const applyFilter = debounce((filter, data) => {
   const initialData = data;
 
-  const debouncePrint = debounce(printThumbnails);
   switch (filter) {
     case 'filter-default': {
-      debouncePrint(initialData);
+      printThumbnails(initialData);
       break;
     }
     case 'filter-random': {
       const randomPosts = getRandomPosts(data);
-      debouncePrint(randomPosts);
+      printThumbnails(randomPosts);
       break;
     }
     case 'filter-discussed': {
       const discussedPosts = sortInDescending(data);
-      debouncePrint(discussedPosts);
+      printThumbnails(discussedPosts);
+      break;
     }
   }
-};
+});
 
 const toggleFilters = (evt, data) => {
   const filterBtn = evt.target.closest('.img-filters__button');
@@ -48,8 +48,6 @@ const toggleFilters = (evt, data) => {
     return;
   }
   const filterName = filterBtn.id;
-
-  const ACTIVE_FILTER = 'img-filters__button--active';
   const activeFilterBtn = document.querySelector(`.${ACTIVE_FILTER}`);
   activeFilterBtn.classList.remove(`${ACTIVE_FILTER}`);
   filterBtn.classList.add(ACTIVE_FILTER);
