@@ -9,7 +9,7 @@ import { showDataError } from './notifications.js';
 import { showFilters, toggleFilters, filters } from './filters.js';
 
 
-const initApp = async () => {
+const onInitApp = async () => {
   let data;
 
   try {
@@ -30,4 +30,4 @@ const initApp = async () => {
 
 };
 
-document.addEventListener('DOMContentLoaded', initApp);
+document.addEventListener('DOMContentLoaded', onInitApp);

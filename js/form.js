@@ -1,10 +1,10 @@
-import { escKeypress, percentToInteger, integerToPercent, toggleBtnDisable } from './utils.js';
+import { escKeypress, convertIntegerToPercent, convertPercentToInteger, toggleBtnDisable } from './utils.js';
 import { sendFormData } from './requests.js';
 import { showStatusMessage } from './notifications.js';
 import { hashtagInput, resetUploadForm, commentInput } from './validation.js';
 import { resetSlider } from './effects.js';
 
-const FILE_TYPES = ['.jpg', '.jpeg', '.png'];
+const EXTENSIONS = ['.jpg', '.jpeg', '.png'];
 const MIN_ZOOM_VALUE = 25;
 const MAX_ZOOM_VALUE = 100;
 const ZOOM_STEP = 25;
@@ -20,48 +20,48 @@ const formSubmitBtn = document.querySelector('.img-upload__submit');
 const effectPreviews = document.querySelectorAll('.effects__preview');
 
 
-const zoomIn = () => {
-  let valueNumber = percentToInteger(zoomValue.value);
+const onZoomIn = () => {
+  let valueNumber = convertPercentToInteger(zoomValue.value);
   if (valueNumber + ZOOM_STEP <= MAX_ZOOM_VALUE) {
     valueNumber += ZOOM_STEP;
     imgPreview.style.transform = `scale(${valueNumber / 100})`;
   }
-  zoomValue.value = integerToPercent(valueNumber);
+  zoomValue.value = convertIntegerToPercent(valueNumber);
 };
 
-const zoomOut = () => {
-  let valueNumber = percentToInteger(zoomValue.value);
+const onZoomOut = () => {
+  let valueNumber = convertPercentToInteger(zoomValue.value);
   if (valueNumber - ZOOM_STEP >= MIN_ZOOM_VALUE) {
     valueNumber -= ZOOM_STEP;
     imgPreview.style.transform = `scale(${valueNumber / 100})`;
   }
-  zoomValue.value = integerToPercent(valueNumber);
+  zoomValue.value = convertIntegerToPercent(valueNumber);
 };
 
 const setDefaultZoom = () => {
   imgPreview.style.transform = 'scale(1)';
-  zoomValue.value = integerToPercent(MAX_ZOOM_VALUE);
+  zoomValue.value = convertIntegerToPercent(MAX_ZOOM_VALUE);
 };
 
-const closeEditModal = () => {
+const onCloseEditModal = () => {
   editModal.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  closeModalBtn.removeEventListener('click', closeEditModal);
+  closeModalBtn.removeEventListener('click', onCloseEditModal);
   resetUploadForm();
   setDefaultZoom();
   resetSlider();
 };
 
-const showEditModal = () => {
+const onShowEditModal = () => {
   editModal.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  closeModalBtn.addEventListener('click', closeEditModal);
+  closeModalBtn.addEventListener('click', onCloseEditModal);
 };
 
-const imageUpload = () => {
+const onImageUpload = () => {
   const file = uploadInput.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = EXTENSIONS.some((it) => fileName.endsWith(it));
 
   if (matches) {
     imgPreview.src = URL.createObjectURL(file);
@@ -81,7 +81,7 @@ const sendImageForm = async (formData) => {
       throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
     }
 
-    closeEditModal();
+    onCloseEditModal();
     showStatusMessage(true);
   } catch (error) {
     showStatusMessage(false);
@@ -94,17 +94,17 @@ const sendImageForm = async (formData) => {
 document.addEventListener('keydown', (evt) => {
   const activeElement = document.activeElement;
   if (activeElement !== commentInput && activeElement !== hashtagInput) {
-    escKeypress(evt, closeEditModal);
+    escKeypress(evt, onCloseEditModal);
   }
 });
 
-zoomInBtn.addEventListener('click', zoomIn);
-zoomOutBtn.addEventListener('click', zoomOut);
+zoomInBtn.addEventListener('click', onZoomIn);
+zoomOutBtn.addEventListener('click', onZoomOut);
 
 uploadInput.addEventListener('change', () => {
-  showEditModal();
-  imageUpload();
+  onShowEditModal();
+  onImageUpload();
 });
 
 
-export {imgPreview, closeEditModal, sendImageForm};
+export {imgPreview, onCloseEditModal, sendImageForm};

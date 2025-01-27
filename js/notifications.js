@@ -21,16 +21,16 @@ const closeFormMessage = (elem) => {
     document.body.removeEventListener('keydown', closeOnEsc);
   };
 
-  const handleClickOutside = (evt) => {
+  const onHandleClickOutside = (evt) => {
     const messageArea = evt.target.closest('div');
     if (evt.target === messageArea) {
       return;
     }
     elem.remove();
-    document.removeEventListener('click', handleClickOutside);
+    document.removeEventListener('click', onHandleClickOutside);
   };
 
-  document.addEventListener('click', handleClickOutside);
+  document.addEventListener('click', onHandleClickOutside);
   document.body.addEventListener('keydown', closeOnEsc);
 };
 

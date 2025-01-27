@@ -28,9 +28,9 @@ const escKeypress = (evt, fn) => {
   }
 };
 
-const percentToInteger = (value) => Number(value.replace('%', ''));
+const convertPercentToInteger = (value) => Number(value.replace('%', ''));
 
-const integerToPercent = (value) => `${value}%`;
+const convertIntegerToPercent = (value) => `${value}%`;
 
 const sortInDescending = (data) => {
   const sortedData = [...data].sort((a, b) => b.comments.length - a.comments.length);
@@ -51,4 +51,4 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
-export {createRandomId, getRandomInteger, escKeypress, percentToInteger, integerToPercent, sortInDescending, toggleBtnDisable, debounce};
+export {createRandomId, getRandomInteger, escKeypress, convertPercentToInteger, convertIntegerToPercent, sortInDescending, toggleBtnDisable, debounce};

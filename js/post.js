@@ -11,9 +11,9 @@ const commentsCount = document.querySelector('.social__comment-shown-count');
 let currentCount = 0;
 let comments = [];
 
-const closePostModal = () => {
+const onClosePostModal = () => {
   postModal.classList.add('hidden');
-  closeModalBtn.removeEventListener('click', closePostModal);
+  closeModalBtn.removeEventListener('click', onClosePostModal);
   document.body.classList.remove('modal-open');
 };
 
@@ -38,13 +38,21 @@ const insertMoreComments = () => {
   commentsToPrint.forEach((comment) => {
     const commentNode = document.createElement('li');
     commentNode.classList.add('social__comment');
-    commentNode.innerHTML = `
-    <img
-      class="social__picture"
-      src="${comment.avatar}"
-      alt="${comment.name}"
-      width="35" height="35">
-    <p class="social__text">${comment.message}</p>`;
+
+    const imgNode = document.createElement('img');
+    imgNode.classList.add('social__picture');
+    imgNode.src = comment.avatar;
+    imgNode.alt = comment.name;
+    imgNode.width = 35;
+    imgNode.height = 35;
+
+    const textNode = document.createElement('p');
+    textNode.classList.add('social__text');
+    textNode.textContent = comment.message;
+
+    commentNode.appendChild(imgNode);
+    commentNode.appendChild(textNode);
+
     commentsFragment.append(commentNode);
   });
 
@@ -66,7 +74,7 @@ const openPostModal = (content) => {
   postModal.querySelector('.social__caption').textContent = content.description;
   postModal.querySelector('.social__comment-total-count').textContent = content.comments.length;
   insertPostComments(content.comments);
-  closeModalBtn.addEventListener('click', closePostModal);
+  closeModalBtn.addEventListener('click', onClosePostModal);
 };
 
 const findPostContent = (evt, data) => {
@@ -80,7 +88,7 @@ const findPostContent = (evt, data) => {
 };
 
 document.addEventListener('keydown', (evt) => {
-  escKeypress(evt, closePostModal);
+  escKeypress(evt, onClosePostModal);
 });
 
 loadMore.addEventListener('click', () => insertMoreComments());
