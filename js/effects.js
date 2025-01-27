@@ -65,7 +65,7 @@ sliderContainer.noUiSlider.on('update', () => {
   applyFilter(value);
 });
 
-const toggleEffect = (evt) => {
+const onToggleEffect = (evt) => {
   const effectBtn = evt.target.closest('input');
   if (!effectBtn) {
     return;
@@ -83,6 +83,6 @@ const resetSlider = () => {
   applyFilter(EFFECTS_DATA.none.min);
 };
 
-effectsList.addEventListener('change', toggleEffect);
+effectsList.addEventListener('change', onToggleEffect);
 
 export { resetSlider };
